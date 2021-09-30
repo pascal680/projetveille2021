@@ -32,7 +32,9 @@ print("Shape after one-hot encoding: ", y_train.shape)
 # building a linear stack of layers with the sequential model
 model = Sequential()
 
-
+model.add(Conv2D(70, kernel_size=(3,3), strides=(1,1), padding='same', activation='relu')) #Applies filter on the image in squares of 3x3 matrices and adding it all up with an activation function to reinforce patterns
+model.add(MaxPool2D(pool_size=(2,2))) #Compress filtered data for image and reinforce patterns
+model.add(Dropout(0.25))
 # convolutional layer
 model.add(Conv2D(70, kernel_size=(3,3), strides=(1,1), padding='same', activation='relu')) #Applies filter on the image in squares of 3x3 matrices and adding it all up with an activation function to reinforce patterns
 model.add(MaxPool2D(pool_size=(2,2))) #Compress filtered data for image and reinforce patterns
@@ -59,5 +61,9 @@ model.compile(loss='categorical_crossentropy', metrics=['accuracy'], optimizer='
 # training the model for 10 epochs
 model.fit(x_train, y_train, batch_size=128, epochs=25, validation_data=(x_test, y_test))
 
-model.save('image_categorizing_cnn.model')
+model.save('image_categorizing_cnn_v2.1.model')
 
+# CONCLUSION
+# L'ajout d'un autre conv layer et un autre pooling layer fait que la compression est trop eleve 
+# et il y a une perte d'info et des patterns.
+# reduction de 83% a 79% apres 25 epochs
