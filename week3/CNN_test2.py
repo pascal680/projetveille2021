@@ -11,6 +11,7 @@ import tensorflow as tf
 (x_train, y_train), (x_test, y_test) = cifar10.load_data()
 
 print(x_train.shape)
+print(tf.__version__)
 # # building the input vector from the 32x32 pixels
 x_train = x_train.reshape(x_train.shape[0], 32, 32, 3)
 x_test = x_test.reshape(x_test.shape[0], 32, 32, 3)
