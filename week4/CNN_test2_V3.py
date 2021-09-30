@@ -63,5 +63,5 @@ model.save('image_categorizing_cnn_v3.model')
 
 # CONCLUSION
 # L'ajout d'un autre conv layer tout seul en specifiant le input type permet de distinguer les patterns plus facilement avant 
-# de comprimer avec le pooling layer
+# de comprimer avec le pooling layer. Aussi ajout de filtres dans les couches conches conv2d
 # Augmentation, rendu a 91% apres 25 epochs. Reste amelioration a faire
