@@ -34,11 +34,11 @@ model = Sequential()
 
 model.add(Conv2D(50, kernel_size=(3,3), strides=(1,1), padding='same', activation='relu', input_shape=(32, 32, 3)))
 # convolutional layer
-model.add(Conv2D(75, kernel_size=(3,3), strides=(1,1), padding='same', activation='relu')) #Applies filter on the image in squares of 3x3 matrices and adding it all up with an activation function to reinforce patterns
+model.add(Conv2D(75, kernel_size=(5,5), strides=(2,2), padding='same', activation='relu')) #Applies filter on the image in squares of 3x3 matrices and adding it all up with an activation function to reinforce patterns
 model.add(MaxPool2D(pool_size=(2,2))) #Compress filtered data for image and reinforce patterns
 model.add(Dropout(0.25)) #Remove useless filtered images and reduce training time
 
-model.add(Conv2D(125, kernel_size=(3,3), strides=(1,1), padding='same', activation='relu')) #Applies filter on the image in squares of 3x3 matrices and adding it all up with an activation function to reinforce patterns
+model.add(Conv2D(125, kernel_size=(5,5), strides=(2,2), padding='same', activation='relu')) #Applies filter on the image in squares of 3x3 matrices and adding it all up with an activation function to reinforce patterns
 model.add(MaxPool2D(pool_size=(2,2))) #Compress filtered data for image and reinforce patterns
 model.add(Dropout(0.25)) #Remove useless filtered images and reduce training time
 
@@ -59,9 +59,9 @@ model.compile(loss='categorical_crossentropy', metrics=['accuracy'], optimizer='
 # training the model for 10 epochs
 model.fit(x_train, y_train, batch_size=128, epochs=25, validation_data=(x_test, y_test))
 
-model.save('image_categorizing_cnn_v3.model')
+model.save('image_categorizing_cnn_v3.1.model')
 
 # CONCLUSION
-# L'ajout d'un autre conv layer tout seul en specifiant le input type permet de distinguer les patterns plus facilement avant 
-# de comprimer avec le pooling layer. Aussi ajout de filtres dans les couches conches conv2d
-# Augmentation, rendu a 91% apres 25 epochs. Reste amelioration a faire
+# Ajout des strides dans les couches conv2d mais cause une perte de precision et un perte des patterns car les filtres
+# du conv2d on moins d'effet sur une image de tel grandeur avec les strides et les plus gros filtres
+# Diminution, rendu a 80% apres 25 epochs. Stride non utile pour image 32x32
